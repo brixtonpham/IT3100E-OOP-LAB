@@ -1,0 +1,455 @@
+/*2.2.5  Write a program to calculate sum, difference, product, and quotient of 2 double numbers which
+are entered by users.*/
+import javax.swing.JOptionPane;
+public class Calculator {
+    public static void main(String[] args) {
+        String strNum1, strNum2;
+        strNum1 = JOptionPane.showInputDialog(null, "Please input the first number:","Input the first number", JOptionPane.INFORMATION_MESSAGE);
+        strNum2 = JOptionPane.showInputDialog(null, "Please input the second number:","Input the second number", JOptionPane.INFORMATION_MESSAGE);
+        double num1 = Double.parseDouble(strNum1);
+        double num2 = Double.parseDouble(strNum2);
+        JOptionPane.showMessageDialog(null,
+        "Sum of two numbers is: "+ (num1+num2) 
+        +"\nDifference of two numbers is: " + (num1-num2) 
+        +"\nProduct of two numbers is: "+(num1*num2)
+        +"\nQuotient of two numbers is: "+(num1/num2) ,
+        "Calculator",
+        JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
+    }
+}
+
+/*2.2.6*/
+import java.util.Scanner;
+public class solveEquation {
+    public static double solveLinearEquation(double a, double b) {
+        if (a == 0) {
+            if (b == 0) {
+                System.out.println("Infinite solutions");
+            } else {
+                System.out.println("No solution");
+            }
+            return 0;
+        } else {
+            return -b / a;
+        }
+    }
+
+    public static void solveLinearSystem(double a1, double b1, double c1, double a2, double b2, double c2) {
+        double determinant = a1 * b2 - a2 * b1;
+        if (determinant == 0) {
+            if (a1 / a2 == b1 / b2 && b1 / b2 == c1 / c2) {
+                System.out.println("Infinite solutions");
+            } else {
+                System.out.println("No solution");
+            }
+        } else {
+            double x = (c1 * b2 - c2 * b1) / determinant;
+            double y = (a1 * c2 - a2 * c1) / determinant;
+            System.out.println("Solution: x = " + x + ", y = " + y);
+        }
+    }
+
+    public static void solveQuadraticEquation(double a, double b, double c) {
+        double discriminant = b * b - 4 * a * c;
+        if (discriminant < 0) {
+            System.out.println("No real roots");
+        } else if (discriminant == 0) {
+            double x = -b / (2 * a);
+            System.out.println("Double root: x = " + x);
+        } else {
+            double x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+            double x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+            System.out.println("Root 1: x1 = " + x1);
+            System.out.println("Root 2: x2 = " + x2);
+        }
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean isSolve = true;
+
+        while (isSolve) {
+            System.out.println("Choose the type of equation to solve:");
+            System.out.println("1. The first-degree equation (linear equation) with one variable");
+            System.out.println("2. The system of first-degree equations (linear system) with two variables");
+            System.out.println("3. The second-degree equation with one variable");
+            System.out.println("4. Exit");
+
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("The first-degree equation (linear equation) with one variable:");
+                    System.out.print("Enter the coefficient a: ");
+                    double a = scanner.nextDouble();
+                    System.out.print("Enter the coefficient b: ");
+                    double b = scanner.nextDouble();
+                    System.out.println("Solution: x = " + solveLinearEquation(a, b));
+                    break;
+                case 2:
+                    System.out.println("The system of first-degree equations (linear system) with two variables:");
+                    System.out.print("Enter coefficient a1: ");
+                    double a1 = scanner.nextDouble();
+                    System.out.print("Enter coefficient b1: ");
+                    double b1 = scanner.nextDouble();
+                    System.out.print("Enter constant c1: ");
+                    double c1 = scanner.nextDouble();
+                    System.out.print("Enter coefficient a2: ");
+                    double a2 = scanner.nextDouble();
+                    System.out.print("Enter coefficient b2: ");
+                    double b2 = scanner.nextDouble();
+                    System.out.print("Enter constant c2: ");
+                    double c2 = scanner.nextDouble();
+                    solveLinearSystem(a1, b1, c1, a2, b2, c2);
+                    break;
+                case 3:
+                    System.out.println("The second-degree equation with one variable:");
+                    System.out.print("Enter coefficient a: ");
+                    double quadratic_a = scanner.nextDouble();
+                    System.out.print("Enter coefficient b: ");
+                    double quadratic_b = scanner.nextDouble();
+                    System.out.print("Enter coefficient c: ");
+                    double quadratic_c = scanner.nextDouble();
+                    solveQuadraticEquation(quadratic_a, quadratic_b, quadratic_c);
+                    break;
+                case 4:
+                    isSolve = false;
+                    System.out.println("Exiting the program...");
+                    break;
+                default:
+                    System.out.println("Invalid choice");
+                    break;
+            }
+        }
+
+        scanner.close();
+    }
+}
+//6.1
+import javax.swing.JOptionPane;
+public class ChoosingOption{
+    public static void main(String[] args) {
+        int option = JOptionPane.showConfirmDialog(null, "Do you want to change to the first class ticket?", null, 0);
+        JOptionPane.showMessageDialog(null, "You've chosen: " + (option==JOptionPane.YES_OPTION?"Yes":"No"));
+        System.exit(0);
+    }
+}
+//6.2
+import java.util.Scanner;
+public class InputFromKeyBoard {
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("What's your name?");
+        String strName = keyboard.nextLine();
+        System.out.println("How old are you?");
+        int iAge = keyboard.nextInt();
+        System.out.println("How tall are you (m)?");
+        double dHeight = keyboard.nextDouble();
+
+        //similar to other data types: nextByte(), nextShort(), nextLong(), nextFloat(), nextBoolean()
+
+        System.out.println("Mrs/Ms. " + strName + ", " + iAge + " years old. " + "Your height is " + dHeight + ".");
+    }
+}
+//6.3
+import java.util.Scanner;
+
+public class Triangle {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("n=");
+        int n = scanner.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 0; k < 2 * i + 1; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        scanner.close();
+    }
+}
+//6.4
+import java.util.Scanner;
+
+public class MonthDays {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("Enter the month (full name, abbreviation, or number): ");
+            String monthInput = scanner.nextLine().toLowerCase();
+            System.out.print("Enter the year: ");
+            int year = scanner.nextInt();
+            scanner.nextLine(); 
+
+            // Validate month input
+            int month = getMonth(monthInput);
+            if (month == -1) {
+                System.out.println("Invalid month. Please enter again.");
+                continue;
+            }
+
+            // Validate year input
+            if (year < 0) {
+                System.out.println("Invalid year. Please enter a non-negative number.");
+                continue;
+            }
+
+            // Check if it's a leap year
+            boolean isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+
+            // Get the number of days in the month
+            int days = getDaysInMonth(month, isLeapYear);
+
+            // Display the result
+            System.out.println("Number of days in " + monthName(month) + " " + year + ": " + days);
+
+            // Ask user if they want to continue
+            System.out.print("Do you want to check another month? (yes/no): ");
+            String choice = scanner.nextLine().toLowerCase();
+            if (choice!="yes") {
+                break;
+            }
+        }
+
+        scanner.close();
+    }
+
+    public static int getMonth(String input) {
+        switch (input) {
+            case "january":
+            case "jan.":
+            case "jan":
+            case "1":
+                return 1;
+            case "february":
+            case "feb.":
+            case "feb":
+            case "2":
+                return 2;
+            case "march":
+            case "mar.":
+            case "mar":
+            case "3":
+                return 3;
+            case "april":
+            case "apr.":
+            case "apr":
+            case "4":
+                return 4;
+            case "may":
+            case "5":
+                return 5;
+            case "june":
+            case "jun.":
+            case "jun":
+            case "6":
+                return 6;
+            case "july":
+            case "jul.":
+            case "jul":
+            case "7":
+                return 7;
+            case "august":
+            case "aug.":
+            case "aug":
+            case "8":
+                return 8;
+            case "september":
+            case "sept.":
+            case "sept":
+            case "9":
+                return 9;
+            case "october":
+            case "oct.":
+            case "oct":
+            case "10":
+                return 10;
+            case "november":
+            case "nov.":
+            case "nov":
+            case "11":
+                return 11;
+            case "december":
+            case "dec.":
+            case "dec":
+            case "12":
+                return 12;
+            default:
+                return -1;
+        }
+    }
+
+    public static int getDaysInMonth(int month, boolean isLeapYear) {
+        switch (month) {
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                return 31;
+            case 4: case 6: case 9: case 11:
+                return 30;
+            case 2:
+                return isLeapYear ? 29 : 28;
+            default:
+                return -1;
+        }
+    }
+
+    public static String monthName(int month) {
+        switch (month) {
+            case 1: return "January";
+            case 2: return "February";
+            case 3: return "March";
+            case 4: return "April";
+            case 5: return "May";
+            case 6: return "June";
+            case 7: return "July";
+            case 8: return "August";
+            case 9: return "September";
+            case 10: return "October";
+            case 11: return "November";
+            case 12: return "December";
+            default: return "";
+        }
+    }
+}
+//6.5
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class SortNumericArray {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Choose how to input the array:");
+        System.out.println("1. Enter array manually");
+        System.out.println("2. Use a constant example");
+        System.out.print("Enter your choice: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); 
+
+        int[] array;
+        switch (choice) {
+            case 1:
+                array = input(scanner);
+                break;
+            case 2:
+                array = new int[] { 5, 3, 8, 2, 1 }; // constant example
+                break;
+            default:
+                System.out.println("Invalid choice. Exiting...");
+                scanner.close();
+                return;
+        }
+
+        Arrays.sort(array);
+
+        // Calculate the sum 
+        int sum = 0;
+        for (int num : array) {
+            sum += num;
+        }
+
+        // Calculate the average
+        double average = (double) sum / array.length;
+
+        // Result
+        System.out.println("Sorted array: " + Arrays.toString(array));
+        System.out.println("Sum of array elements: " + sum);
+        System.out.println("Average of array elements: " + average);
+
+        scanner.close();
+    }
+
+    // Input array
+    public static int[] input(Scanner scanner) {
+        System.out.print("Enter the size of the array: ");
+        int size = scanner.nextInt();
+        scanner.nextLine(); 
+
+        int[] array = new int[size];
+
+        System.out.println("Enter the elements of the array:");
+        for (int i = 0; i < size; i++) {
+            System.out.print("Enter element " + (i + 1) + ": ");
+            array[i] = scanner.nextInt();
+            scanner.nextLine();
+        }
+
+        return array;
+    }
+}
+//6.6
+import java.util.Scanner;
+
+public class SumOfTwoMatrices {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int rows, cols;
+        System.out.println("Enter the dimensions of the matrices:");
+        System.out.print("Number of rows: ");
+        rows = scanner.nextInt();
+        System.out.print("Number of columns: ");
+        cols = scanner.nextInt();
+
+        int[][] matrix1, matrix2;
+        matrix1 = input(scanner, rows, cols);
+        matrix2 = input(scanner, rows, cols);
+          
+        int[][] resultMatrix = add(matrix1, matrix2);
+
+        // Display the result
+
+        System.out.println("Sum Of Two Matrices");
+        displayMatrix(resultMatrix);
+
+        scanner.close();
+    }
+
+
+    public static int[][] input(Scanner scanner, int rows, int cols) {
+        int[][] matrix = new int[rows][cols];
+
+        System.out.println("Enter the matrix:");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                matrix[i][j] = scanner.nextInt();
+            }
+        }
+
+        return matrix;
+    }
+
+    // Method to add two matrices
+    public static int[][] add(int[][] matrix1, int[][] matrix2) {
+        int rows = matrix1.length;
+        int cols = matrix1[0].length;
+        int[][] resultMatrix = new int[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                resultMatrix[i][j] = matrix1[i][j] + matrix2[i][j];
+            }
+        }
+
+        return resultMatrix;
+    }
+
+    // Method to display a matrix
+    public static void displayMatrix(int[][] matrix) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
