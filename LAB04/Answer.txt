@@ -1,0 +1,36 @@
+1. What class should implement the Comparable interface?
+While Comparable allows for natural sorting based on a single attribute, using custom comparators gives more flexibility, allowing multiple sorting criteria. However, when a class needs to be sorted by just one attribute, implementing Comparable is suitable.
+
+2. In those classes, how should you implement the compareTo() method to reflect the ordering that we want?
+Implementing Comparable involves overriding the compareTo() method to define the natural ordering of instances. This method should return a negative integer, zero, or a positive integer based on whether the current object is less than, equal to, or greater than the specified object. Utilizing Collections.sort(list) will then apply this natural sorting.
+
+3. Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+No we can not because implementing Comparable restricts us to a single comparison rule per class. Therefore, we cannot have two distinct ordering rules for instances of the same class using Comparable.
+
+4. Suppose the DVDs have a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
+We can overwrite it like this:
+
+import java.util.Comparator;
+
+@Override
+class CombinedComparator implements Comparator<media> 
+{    
+    public int compare(DVDs a1, DVDs a2) 
+    {
+        if (a1.getTitle().compareTo(a2.getTitle()) != 0) 
+        {
+            return a1.getTitle().compareTo(a2.getTitle());
+        } 
+        else
+        {
+            if (a1 instanceof DVDs && a2 instanceof DVDs) 
+            {
+                return Integer.compare(((DVDs) a1).getLength(), ((DVDs) a2).getLength());
+            } 
+            else 
+            {
+                return Double.compare(a1.getCost(), a2.getCost());
+            }
+        }
+    }
+}
